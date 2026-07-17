@@ -72,13 +72,10 @@ if (initial) search();
                     <TrackingTimeline :timeline="result.timeline" />
                 </div>
             </div>
-<<<<<<< HEAD
 
             <div v-else-if="!errorMessage && !loading" class="rounded-2xl border border-dashed border-slate-200 p-10 text-center">
                 <p class="text-sm text-slate-500">Masukkan nomor resi di atas untuk melihat status pengiriman.</p>
             </div>
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         </section>
     </PublicLayout>
 </template>

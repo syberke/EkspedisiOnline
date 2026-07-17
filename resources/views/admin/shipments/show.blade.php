@@ -65,7 +65,6 @@
         </div>
 
         <div class="space-y-6">
-<<<<<<< HEAD
             <!-- STATUS (READ-ONLY) -->
             <div class="rounded-2xl border border-slate-100 bg-white p-6">
                 <h2 class="font-bold text-slate-800">Status Pengiriman</h2>
@@ -83,66 +82,6 @@
                     </p>
                 @endif
             </div>
-=======
-            <!-- UPDATE STATUS -->
-            @can('update', $shipment)
-                <div class="rounded-2xl border border-slate-100 bg-white p-6">
-                    <h2 class="font-bold text-slate-800">Update Status</h2>
-                    <form method="POST" action="{{ route('admin.shipments.update-status', $shipment) }}" class="mt-4 space-y-3">
-                        @csrf
-                        <select name="status" required class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none">
-                            <option value="picked_up">Sudah Diambil</option>
-                            <option value="in_transit">Dalam Perjalanan</option>
-                            <option value="arrived_at_branch">Tiba di Cabang</option>
-                            <option value="out_for_delivery">Sedang Diantar</option>
-                            <option value="delivered">Terkirim</option>
-                            <option value="cancelled">Dibatalkan</option>
-                        </select>
-                        <input type="text" name="location" placeholder="Lokasi (opsional)"
-                               class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none">
-                        <textarea name="description" required rows="2" placeholder="Deskripsi update"
-                                  class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none"></textarea>
-                        <button type="submit" class="w-full rounded-xl bg-brand-gradient px-4 py-2.5 text-sm font-semibold text-white hover:opacity-90">
-                            Simpan Update
-                        </button>
-                    </form>
-                </div>
-            @endcan
-
-            <!-- ASSIGN KURIR -->
-            @can('assignCourier', $shipment)
-                <div class="rounded-2xl border border-slate-100 bg-white p-6">
-                    <h2 class="font-bold text-slate-800">Kurir</h2>
-
-                    @if ($shipment->courier)
-                        <p class="mt-2 text-sm text-slate-600">
-                            Ditugaskan ke: <span class="font-semibold">{{ $shipment->courier->name }}</span>
-                            <span class="text-xs text-slate-400">(otomatis, bergantian sesuai beban kerja)</span>
-                        </p>
-                    @else
-                        <p class="mt-2 text-sm text-amber-600">
-                            Belum ada kurir tersedia di cabang asal. Kurir akan otomatis
-                            ditugaskan begitu pembayaran dikonfirmasi (kalau ada yang aktif),
-                            atau tugaskan manual di bawah.
-                        </p>
-                    @endif
-
-                    <p class="mt-3 text-xs font-semibold uppercase text-slate-400">Override Manual</p>
-                    <form method="POST" action="{{ route('admin.shipments.assign-courier', $shipment) }}" class="mt-2 flex gap-2">
-                        @csrf
-                        <select name="courier_id" required class="flex-1 rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none">
-                            <option value="">Pilih kurir lain...</option>
-                            @foreach ($couriers as $courier)
-                                <option value="{{ $courier->id }}" @selected($shipment->courier_id === $courier->id)>{{ $courier->name }}</option>
-                            @endforeach
-                        </select>
-                        <button type="submit" class="rounded-xl bg-slate-800 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-700">
-                            Ganti
-                        </button>
-                    </form>
-                </div>
-            @endcan
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         </div>
     </div>
 </x-admin-layout>

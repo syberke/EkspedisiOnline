@@ -50,7 +50,6 @@ class ShipmentService
         });
     }
 
-<<<<<<< HEAD
     /**
      * Update status shipment secara berurutan sesuai alur linear
      * (Pending → PickedUp → InTransit → ArrivedAtBranch → OutForDelivery
@@ -78,11 +77,6 @@ class ShipmentService
                 ]);
             }
 
-=======
-    public function updateStatus(Shipment $shipment, array $data): ShipmentTracking
-    {
-        return DB::transaction(function () use ($shipment, $data) {
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
             $tracking = ShipmentTracking::create([
                 'shipment_id' => $shipment->id,
                 'status' => $data['status'],

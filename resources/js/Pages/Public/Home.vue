@@ -4,18 +4,11 @@ import { Head, Link } from '@inertiajs/vue3';
 import PublicLayout from '@/Layouts/PublicLayout.vue';
 
 defineProps({
-<<<<<<< HEAD
     home: { type: Object, required: true }, // { rates, stats }
 });
 
 const faqs = [
 
-=======
-    home: { type: Object, required: true },
-});
-
-const faqs = [
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
     { q: 'Bagaimana cara mengirim paket lewat drgEkspedisi?', a: 'Daftar/masuk sebagai customer, buka menu "Kirim Paket", isi cabang asal-tujuan, data penerima, dan barang yang dikirim. Tarif otomatis terhitung sebelum kamu bayar.' },
     { q: 'Metode pembayaran apa saja yang tersedia?', a: 'Cash (dibayar langsung ke kasir cabang), Transfer Bank, dan E-Wallet (GoPay/ShopeePay) lewat Midtrans.' },
     { q: 'Bagaimana cara melacak paket saya?', a: 'Buka menu "Lacak Paket", masukkan nomor resi yang kamu dapat setelah membuat pengiriman. Gak perlu login.' },
@@ -24,7 +17,6 @@ const faqs = [
 ];
 const openFaq = ref(null);
 
-<<<<<<< HEAD
 const setupReveal = () => {
     const els = Array.from(document.querySelectorAll('[data-reveal]'));
     if (!els.length) return;
@@ -63,37 +55,12 @@ onMounted(() => {
 </script>
 
 
-=======
-// Scroll reveal for Inertia pages (Vue takes over DOM)
-onMounted(() => {
-    const reveals = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            },
-            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-        );
-        reveals.forEach((el) => observer.observe(el));
-    } else {
-        reveals.forEach((el) => el.classList.add('revealed'));
-    }
-});
-</script>
-
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 <template>
     <Head title="drgEkspedisi — Pengiriman Cepat, Terlacak, Terpercaya" />
 
     <PublicLayout>
         <!-- HERO -->
         <section class="relative overflow-hidden">
-<<<<<<< HEAD
             <div class="inset-0 pointer-events-none absolute opacity-0 transition-opacity duration-300" aria-hidden="true" />
 
             <div class="absolute inset-0 -z-10 bg-brand-gradient-soft [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
@@ -103,14 +70,6 @@ onMounted(() => {
 
                     <span class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-brand-700 shadow-sm shadow-slate-200">
                         🚚 Jaringan 5 cabang di seluruh Indonesia
-=======
-            <div class="absolute inset-0 -z-10 bg-brand-gradient-soft [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
-
-            <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-16 pt-16 lg:grid-cols-2 lg:pt-24">
-                <div>
-                    <span class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-brand-700 shadow-sm shadow-slate-200">
-                        🚚 Jaringan {{ home.stats.total_branches }} cabang di seluruh Indonesia
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
                     </span>
                     <h1 class="mt-5 text-4xl font-extrabold leading-tight text-slate-800 sm:text-5xl">
                         Pengiriman Cepat,
@@ -130,12 +89,8 @@ onMounted(() => {
                 </div>
 
                 <!-- ILUSTRASI RUTE PENGIRIMAN -->
-<<<<<<< HEAD
                 <div data-reveal class="relative mx-auto w-full max-w-md reveal-init opacity-0 translate-y-2 transition-all duration-700">
 
-=======
-                <div class="relative mx-auto w-full max-w-md">
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
                     <svg viewBox="0 0 400 320" class="w-full drop-shadow-sm">
                         <defs>
                             <linearGradient id="routeGrad" x1="0" y1="0" x2="1" y2="1">
@@ -190,34 +145,12 @@ onMounted(() => {
             </div>
         </section>
 
-<<<<<<< HEAD
 
 
         <!-- KENAPA PILIH KAMI -->
         <section class="mx-auto mt-24 max-w-5xl px-5">
             <h2 data-reveal class="reveal-init opacity-0 translate-y-2 transition-all duration-700 text-center text-2xl font-extrabold text-slate-800">Kenapa drgEkspedisi?</h2>
 
-=======
-        <!-- STATS -->
-        <section class="mx-auto mt-4 grid max-w-4xl grid-cols-3 gap-4 px-5 text-center">
-            <div class="rounded-2xl bg-brand-gradient-soft p-6">
-                <p class="text-2xl font-extrabold text-brand-700 sm:text-3xl">{{ home.stats.total_shipments.toLocaleString('id-ID') }}+</p>
-                <p class="mt-1 text-xs font-medium text-slate-500 sm:text-sm">Total Pengiriman</p>
-            </div>
-            <div class="rounded-2xl bg-brand-gradient-soft p-6">
-                <p class="text-2xl font-extrabold text-brand-700 sm:text-3xl">{{ home.stats.total_branches }}</p>
-                <p class="mt-1 text-xs font-medium text-slate-500 sm:text-sm">Cabang Aktif</p>
-            </div>
-            <div class="rounded-2xl bg-brand-gradient-soft p-6">
-                <p class="text-2xl font-extrabold text-brand-700 sm:text-3xl">{{ home.stats.delivered_this_month.toLocaleString('id-ID') }}</p>
-                <p class="mt-1 text-xs font-medium text-slate-500 sm:text-sm">Terkirim Bulan Ini</p>
-            </div>
-        </section>
-
-        <!-- KENAPA PILIH KAMI -->
-        <section class="mx-auto mt-24 max-w-5xl px-5">
-            <h2 class="text-center text-2xl font-extrabold text-slate-800">Kenapa drgEkspedisi?</h2>
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
             <div class="mt-10 grid gap-6 sm:grid-cols-3">
                 <div class="rounded-2xl border border-slate-100 p-6 text-center">
                     <div class="mx-auto grid h-12 w-12 place-items-center rounded-xl bg-brand-gradient-soft text-2xl">🚚</div>
@@ -272,33 +205,7 @@ onMounted(() => {
             </div>
         </section>
 
-<<<<<<< HEAD
 
-=======
-        <!-- DAFTAR TARIF RUTE -->
-        <section v-if="home.rates?.length" class="mx-auto mt-24 max-w-4xl px-5">
-            <h2 class="text-xl font-bold text-slate-800">Daftar Tarif Rute</h2>
-            <p class="mt-1 text-sm text-slate-500">Tarif final dihitung otomatis saat kamu isi form Kirim Paket.</p>
-            <div class="mt-6 overflow-hidden rounded-2xl border border-slate-100">
-                <table class="w-full text-left text-sm">
-                    <thead class="bg-slate-50 text-xs font-semibold uppercase text-slate-500">
-                        <tr>
-                            <th class="px-5 py-3">Rute</th>
-                            <th class="px-5 py-3">Harga/kg</th>
-                            <th class="px-5 py-3">Estimasi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-100">
-                        <tr v-for="rate in home.rates" :key="rate.id">
-                            <td class="px-5 py-3 font-medium text-slate-700">{{ rate.origin_city }} → {{ rate.destination_city }}</td>
-                            <td class="px-5 py-3 text-slate-600">Rp{{ Number(rate.price_per_kg).toLocaleString('id-ID') }}</td>
-                            <td class="px-5 py-3 text-slate-600">{{ rate.estimated_days }} hari</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 
         <!-- TENTANG KAMI SINGKAT -->
         <section class="mx-auto mt-24 max-w-4xl px-5">
@@ -316,11 +223,8 @@ onMounted(() => {
             </div>
         </section>
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         <!-- FAQ -->
         <section class="mx-auto mb-24 mt-24 max-w-3xl px-5">
             <h2 class="text-xl font-bold text-slate-800">Pertanyaan Umum</h2>

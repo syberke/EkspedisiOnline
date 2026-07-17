@@ -2,15 +2,10 @@
 
 namespace App\Providers;
 
-<<<<<<< HEAD
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-=======
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Http\Request;
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,7 +28,6 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
-<<<<<<< HEAD
 
         // Karena /login sekarang dijaga oleh `guest:web,customer` (login
         // terpadu), orang yang sudah authenticated di salah satu guard dan
@@ -52,7 +46,5 @@ class AppServiceProvider extends ServiceProvider
 
             return route('home');
         });
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
     }
 }

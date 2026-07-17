@@ -8,11 +8,7 @@ class StoreRateRequest extends FormRequest
 {
     public function authorize(): bool
     {
-<<<<<<< HEAD
         return $this->user()->hasRole('admin');
-=======
-        return $this->user()->hasRole('admin|manager');
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
     }
 
     public function rules(): array

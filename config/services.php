@@ -23,17 +23,10 @@ return [
         ],
     ],
 
-<<<<<<< HEAD
     // Google reCAPTCHA v2 — dipasang di form login/register (staff & customer).
     'recaptcha' => [
         'site_key' => env('RECAPTCHA_SITE_KEY'),
         'secret_key' => env('RECAPTCHA_SECRET_KEY'),
-=======
-    // Google reCAPTCHA v3 — dipasang di form login/register (staff & customer).
-    'recaptcha' => [
-        'site_key' => env('RECAPTCHA_SITE_KEY'),
-        'secret' => env('RECAPTCHA_SECRET'),
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         'min_score' => env('RECAPTCHA_MIN_SCORE', 0.5),
     ],
 

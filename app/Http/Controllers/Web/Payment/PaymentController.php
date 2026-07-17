@@ -22,7 +22,6 @@ class PaymentController extends Controller
 
         $latestPayment = $shipment->payments()->latest()->first();
 
-<<<<<<< HEAD
         // Lapisan pengaman ekstra: kalau masih pending & pakai Midtrans,
         // cek langsung ke Midtrans setiap kali halaman ini dibuka —
         // jangan andalkan webhook/JS callback saja (bisa gagal di dev/local).
@@ -34,8 +33,6 @@ class PaymentController extends Controller
             }
         }
 
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         return view('payment.show', compact('shipment', 'latestPayment'));
     }
 
@@ -44,7 +41,6 @@ class PaymentController extends Controller
     {
         abort_unless($shipment->sender_id === auth('customer')->id(), 403);
 
-<<<<<<< HEAD
         if ($shipment->payments()->where('payment_status', 'paid')->exists()) {
             return redirect()->route('payment.show', $shipment)
                 ->with('success', 'Shipment ini sudah lunas.');
@@ -52,10 +48,6 @@ class PaymentController extends Controller
 
         $validated = $request->validate([
             'payment_method' => ['required', 'in:transfer,e-wallet'],
-=======
-        $validated = $request->validate([
-            'payment_method' => ['required', 'in:cash,transfer,e-wallet'],
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         ]);
 
         $payment = $this->paymentService->record($shipment, $validated['payment_method']);
@@ -67,7 +59,6 @@ class PaymentController extends Controller
         return redirect()->route('payment.show', $shipment)
             ->with('success', 'Pembayaran cash dicatat. Menunggu konfirmasi dari kasir.');
     }
-<<<<<<< HEAD
 
     /** POST /shipments/{shipment}/payment/sync — dipanggil frontend (Snap onSuccess/onPending) buat cek status aktif ke Midtrans, gak nunggu webhook pasif. */
     public function sync(Shipment $shipment): \Illuminate\Http\JsonResponse
@@ -84,6 +75,4 @@ class PaymentController extends Controller
 
         return response()->json(['payment_status' => $payment->payment_status]);
     }
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 }

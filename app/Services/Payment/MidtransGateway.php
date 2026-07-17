@@ -20,7 +20,6 @@ class MidtransGateway
     }
 
     /**
-<<<<<<< HEAD
      * Midtrans menolak email dengan whitespace tersembunyi (mis. dari
      * copy-paste / import CSV) atau format yang tidak valid, meski lolos
      * validasi Laravel `email` rule di form registrasi. Bersihkan &
@@ -51,8 +50,6 @@ class MidtransGateway
     }
 
     /**
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
      * Buat Snap transaction. Satu Snap page menangani transfer/VA maupun
      * e-wallet sekaligus — payment_method di DB kita tetap enum sederhana
      * (transfer/e-wallet) sesuai PDM, Midtrans yang urus detail metodenya.
@@ -62,7 +59,6 @@ class MidtransGateway
         $shipment = $payment->shipment()->with('sender')->first();
         $sender = $shipment->sender;
 
-<<<<<<< HEAD
         if (! $sender) {
             throw new \RuntimeException('Data pengirim tidak ditemukan, tidak bisa membuat transaksi pembayaran.');
         }
@@ -72,9 +68,6 @@ class MidtransGateway
 
         $response = Http::withBasicAuth($this->serverKey, '')
             ->when(app()->environment(['local', 'testing']), fn ($http) => $http->withoutVerifying())
-=======
-        $response = Http::withBasicAuth($this->serverKey, '')
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
             ->acceptJson()
             ->post("{$this->baseUrl}/transactions", [
                 'transaction_details' => [
@@ -82,15 +75,9 @@ class MidtransGateway
                     'gross_amount' => (int) $payment->amount,
                 ],
                 'customer_details' => [
-<<<<<<< HEAD
                     'first_name' => trim($sender->name) ?: 'Pelanggan',
                     'phone' => $phone,
                     'email' => $email,
-=======
-                    'first_name' => $sender->name,
-                    'phone' => $sender->phone,
-                    'email' => $sender->email,
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
                 ],
                 'item_details' => [[
                     'id' => $shipment->tracking_number,
@@ -98,7 +85,6 @@ class MidtransGateway
                     'quantity' => 1,
                     'name' => "Ongkir {$shipment->tracking_number}",
                 ]],
-<<<<<<< HEAD
                 'enabled_payments' => [
                     'bank_transfer', 'echannel', 'permata_va',
                     'gopay', 'shopeepay', 'other_qris',
@@ -107,11 +93,6 @@ class MidtransGateway
                 'credit_card' => [
                     'secure' => true,
                 ],
-=======
-                'enabled_payments' => $payment->payment_method === 'e-wallet'
-                    ? ['gopay', 'shopeepay']
-                    : ['bank_transfer', 'echannel', 'permata_va'],
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
                 'callbacks' => [
                     'finish' => config('app.url')."/pembayaran/{$payment->midtrans_order_id}/selesai",
                 ],
@@ -126,7 +107,6 @@ class MidtransGateway
         return $response->json();
     }
 
-<<<<<<< HEAD
     /**
      * Cek status transaksi langsung ke Midtrans Core API (bukan Snap).
      * Dipakai sebagai fallback aktif: webhook HTTP Notification kadang
@@ -154,8 +134,6 @@ class MidtransGateway
         return $response->json() ?? [];
     }
 
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
     /** Verifikasi signature webhook: SHA512(order_id+status_code+gross_amount+server_key). */
     public function verifySignature(array $payload): bool
     {
@@ -166,7 +144,6 @@ class MidtransGateway
         return hash_equals($expected, $payload['signature_key'] ?? '');
     }
 
-<<<<<<< HEAD
     /**
      * Map status transaksi Midtrans -> payment_status enum kita.
      *
@@ -180,24 +157,14 @@ class MidtransGateway
      * - refund        → refunded
      * - partial_refund → refunded (partial)
      */
-=======
-    /** Map status transaksi Midtrans -> payment_status enum kita (pending/paid/failed). */
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
     public function mapStatus(string $transactionStatus): string
     {
         return match ($transactionStatus) {
             'capture', 'settlement' => 'paid',
             'pending' => 'pending',
-<<<<<<< HEAD
             'expire' => 'expired',
             'refund', 'partial_refund' => 'refunded',
             default => 'failed', // deny, cancel, and unknown
         };
     }
 }
-=======
-            default => 'failed', // deny, cancel, expire, refund
-        };
-    }
-}
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5

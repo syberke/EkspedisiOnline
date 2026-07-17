@@ -20,7 +20,6 @@
 
     <div class="mt-6 grid gap-6 lg:grid-cols-2">
         <div class="rounded-2xl border border-slate-100 bg-white p-6">
-<<<<<<< HEAD
             <h2 class="font-bold text-slate-800">Grafik Operasional</h2>
             <p class="mt-3 text-3xl font-extrabold text-slate-800">{{ $operational['total_shipments'] }}</p>
             <p class="text-xs text-slate-500">Total pengiriman per status</p>
@@ -39,23 +38,10 @@
                 @empty
                     <p class="text-sm text-slate-400">Belum ada data di periode ini.</p>
                 @endforelse
-=======
-            <h2 class="font-bold text-slate-800">Operasional</h2>
-            <p class="mt-3 text-3xl font-extrabold text-slate-800">{{ $operational['total_shipments'] }}</p>
-            <p class="text-xs text-slate-500">Total pengiriman</p>
-            <div class="mt-4 space-y-2 border-t border-slate-100 pt-4">
-                @foreach ($operational['by_status'] as $status => $total)
-                    <div class="flex justify-between text-sm">
-                        <span class="text-slate-500">{{ \App\Enums\ShipmentStatus::from($status)->label() }}</span>
-                        <span class="font-semibold text-slate-700">{{ $total }}</span>
-                    </div>
-                @endforeach
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
             </div>
         </div>
 
         <div class="rounded-2xl border border-slate-100 bg-white p-6">
-<<<<<<< HEAD
             <h2 class="font-bold text-slate-800">Grafik Keuangan</h2>
             <p class="mt-3 text-3xl font-extrabold text-transit-600">Rp{{ number_format($financial['total_revenue'], 0, ',', '.') }}</p>
             <p class="text-xs text-slate-500">{{ $financial['total_transactions'] }} transaksi lunas — per metode bayar</p>
@@ -74,18 +60,6 @@
                 @empty
                     <p class="text-sm text-slate-400">Belum ada data di periode ini.</p>
                 @endforelse
-=======
-            <h2 class="font-bold text-slate-800">Keuangan</h2>
-            <p class="mt-3 text-3xl font-extrabold text-transit-600">Rp{{ number_format($financial['total_revenue'], 0, ',', '.') }}</p>
-            <p class="text-xs text-slate-500">{{ $financial['total_transactions'] }} transaksi lunas</p>
-            <div class="mt-4 space-y-2 border-t border-slate-100 pt-4">
-                @foreach ($financial['by_method'] as $method => $total)
-                    <div class="flex justify-between text-sm">
-                        <span class="text-slate-500">{{ ucfirst(str_replace('-', ' ', $method)) }}</span>
-                        <span class="font-semibold text-slate-700">Rp{{ number_format($total, 0, ',', '.') }}</span>
-                    </div>
-                @endforeach
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
             </div>
         </div>
     </div>

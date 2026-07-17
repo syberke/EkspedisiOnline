@@ -12,10 +12,6 @@ use Illuminate\Support\Facades\Route;
 */
 Route::prefix('v1/auth')->group(function () {
     Route::post('/register', [CustomerAuthController::class, 'register'])->middleware(['throttle:5,1', 'recaptcha']);
-<<<<<<< HEAD
     Route::post('/login', [CustomerAuthController::class, 'login'])->middleware(['throttle:10,1']);
-=======
-    Route::post('/login', [CustomerAuthController::class, 'login'])->middleware(['throttle:10,1', 'recaptcha']);
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
     Route::post('/logout', [CustomerAuthController::class, 'logout'])->middleware('auth:sanctum');
 });

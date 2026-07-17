@@ -19,20 +19,13 @@
                 </thead>
                 <tbody class="divide-y divide-slate-100">
                     @forelse ($rates as $rate)
-<<<<<<< HEAD
                         @php($rateEditData = $rate->only(['id', 'origin_city', 'destination_city', 'price_per_kg', 'estimated_days']))
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
                         <tr>
                             <td class="px-5 py-3 font-medium text-slate-700">{{ $rate->origin_city }} → {{ $rate->destination_city }}</td>
                             <td class="px-5 py-3 text-slate-600">Rp{{ number_format($rate->price_per_kg, 0, ',', '.') }}</td>
                             <td class="px-5 py-3 text-slate-600">{{ $rate->estimated_days }} hari</td>
                             <td class="px-5 py-3 text-right">
-<<<<<<< HEAD
                                 <button @click="modalOpen = true; editing = @json($rateEditData)"
-=======
-                                <button @click='modalOpen = true; editing = {{ $rate->only(["id","origin_city","destination_city","price_per_kg","estimated_days"]) }}'
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
                                         class="text-sm font-semibold text-brand-600">Edit</button>
                                 <form method="POST" action="{{ route('admin.rates.destroy', $rate) }}" class="inline" onsubmit="return confirm('Hapus tarif ini?')">
                                     @csrf @method('DELETE')
@@ -73,8 +66,4 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
 </x-admin-layout>
-=======
-</x-admin-layout>
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5

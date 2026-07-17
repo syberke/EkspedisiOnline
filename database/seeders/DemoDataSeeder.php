@@ -4,14 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Branch;
 use App\Models\Customer;
-<<<<<<< HEAD
 use App\Models\Rate;
-=======
-use App\Models\Payment;
-use App\Models\Rate;
-use App\Models\Shipment;
-use App\Models\ShipmentTracking;
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Database\Seeder;
@@ -57,58 +50,17 @@ class DemoDataSeeder extends Seeder
 
         Vehicle::create(['plate_number' => 'B 1234 ABC', 'type' => 'motor', 'courier_id' => $kurir->id]);
 
-<<<<<<< HEAD
         // Demo customer (sender & receiver) — akun percobaan buat login,
         // TANPA shipment/payment dummy (biar dashboard-nya kosong/bersih
         // sampai customer beneran kirim paket sendiri).
-=======
-        // Demo customer (sender & receiver).
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         $sender = Customer::create([
             'name' => 'Budi Santoso', 'email' => 'budi@example.com', 'password' => Hash::make('Password123'),
             'address' => 'Jl. Melati No. 5', 'city' => 'Jakarta', 'phone' => '081234567890', 'email_verified_at' => now(),
         ]);
 
-<<<<<<< HEAD
         Customer::create([
             'name' => 'Siti Aminah', 'email' => 'siti@example.com', 'password' => Hash::make('Password123'),
             'address' => 'Jl. Merdeka No. 8', 'city' => 'Bandung', 'phone' => '081298765432', 'email_verified_at' => now(),
         ]);
-=======
-        $receiver = Customer::create([
-            'name' => 'Siti Aminah', 'email' => 'siti@example.com', 'password' => Hash::make('Password123'),
-            'address' => 'Jl. Merdeka No. 8', 'city' => 'Bandung', 'phone' => '081298765432', 'email_verified_at' => now(),
-        ]);
-
-        $rate = Rate::where('origin_city', 'Jakarta')->where('destination_city', 'Bandung')->first();
-
-        $shipment = Shipment::create([
-            'sender_id' => $sender->id,
-            'receiver_id' => $receiver->id,
-            'origin_branch_id' => $jakarta->id,
-            'destination_branch_id' => $bandung->id,
-            'courier_id' => $kurir->id,
-            'rate_id' => $rate->id,
-            'total_weight' => 2.5,
-            'total_price' => $rate->calculate(2.5),
-            'shipment_date' => now()->toDateString(),
-        ]);
-
-        $shipment->items()->create(['item_name' => 'Dokumen', 'quantity' => 1, 'weight' => 2.5]);
-
-        foreach ([
-            ['status' => 'picked_up', 'location' => 'Jakarta', 'description' => 'Paket diambil kurir dari alamat pengirim.'],
-            ['status' => 'in_transit', 'location' => 'Perjalanan Jakarta - Bandung', 'description' => 'Paket dalam perjalanan menuju cabang tujuan.'],
-        ] as $step) {
-            ShipmentTracking::create([...$step, 'shipment_id' => $shipment->id, 'tracked_at' => now()]);
-        }
-
-        Payment::create([
-            'shipment_id' => $shipment->id,
-            'amount' => $shipment->total_price,
-            'payment_method' => 'transfer',
-            'payment_status' => 'pending',
-        ]);
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
     }
 }

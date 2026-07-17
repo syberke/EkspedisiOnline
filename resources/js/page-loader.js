@@ -3,11 +3,6 @@
 // 2. Tombol submit otomatis kasih spinner + teks "Memproses..." dan
 //    ke-disable, supaya orang gak double-klik pas nunggu response
 //    (termasuk pas nunggu verifikasi reCAPTCHA yang butuh roundtrip ke Google).
-<<<<<<< HEAD
-=======
-// 3. Scroll reveal — elemen dengan class "reveal" muncul secara bertahap
-//    saat discroll ke viewport.
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 
 function createProgressBar() {
     const bar = document.createElement('div');
@@ -35,38 +30,6 @@ function startProgress() {
     });
 }
 
-<<<<<<< HEAD
-=======
-// Scroll reveal using IntersectionObserver
-function initScrollReveal() {
-    const reveals = document.querySelectorAll('.reveal');
-
-    if (!reveals.length) return;
-
-    if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            },
-            {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px',
-            }
-        );
-
-        reveals.forEach((el) => observer.observe(el));
-    } else {
-        // Fallback: show everything immediately
-        reveals.forEach((el) => el.classList.add('revealed'));
-    }
-}
-
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 document.addEventListener('DOMContentLoaded', () => {
     // Progress bar jalan tiap klik link biasa (bukan anchor/target-blank/download).
     document.addEventListener('click', (e) => {
@@ -114,12 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 8000);
         }
     });
-<<<<<<< HEAD
-=======
-
-    // Initialize scroll reveal
-    initScrollReveal();
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 });
 
 // Bar auto-selesai (ilang) begitu halaman baru selesai render.
@@ -130,9 +87,3 @@ window.addEventListener('pageshow', () => {
         setTimeout(() => { bar.style.opacity = '0'; bar.style.width = '0%'; }, 300);
     }
 });
-<<<<<<< HEAD
-=======
-
-// Re-run scroll reveal for dynamic content (e.g. after navigation)
-document.addEventListener('scroll-reveal-update', initScrollReveal);
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5

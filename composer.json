@@ -4,7 +4,6 @@
     "description": "drgEkspedisi — Platform manajemen ekspedisi & logistik (Laravel 11).",
     "require": {
         "php": "^8.2",
-<<<<<<< HEAD
         "barryvdh/laravel-dompdf": "^3.0",
         "inertiajs/inertia-laravel": "^1.0",
         "laravel/framework": "^11.0",
@@ -13,15 +12,6 @@
         "laravel/tinker": "^2.9",
         "maatwebsite/excel": "^3.1",
         "midtrans/midtrans-php": "^2.6"
-=======
-        "laravel/framework": "^11.0",
-        "laravel/sanctum": "^4.0",
-        "laravel/tinker": "^2.9",
-        "laravel/reverb": "^1.0",
-        "inertiajs/inertia-laravel": "^1.0",
-        "maatwebsite/excel": "^3.1",
-        "barryvdh/laravel-dompdf": "^3.0"
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

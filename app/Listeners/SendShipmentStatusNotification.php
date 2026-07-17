@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\ShipmentStatusUpdated;
-<<<<<<< HEAD
 
 /**
  * PDM belum punya tabel notifikasi/push khusus, jadi untuk sekarang
@@ -14,17 +13,6 @@ use App\Events\ShipmentStatusUpdated;
  * benar-benar punya backing store (database/redis) dan tabelnya sudah dibuat.
  */
 class SendShipmentStatusNotification
-=======
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Notification;
-
-/**
- * Dijalankan async lewat Queue. PDM belum punya tabel notifikasi/push
- * khusus, jadi untuk sekarang kirim email standar Laravel Notification
- * ke customer (guard `customer`) memakai mailer bawaan.
- */
-class SendShipmentStatusNotification implements ShouldQueue
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 {
     public function handle(ShipmentStatusUpdated $event): void
     {

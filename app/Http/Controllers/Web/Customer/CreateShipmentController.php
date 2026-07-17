@@ -13,12 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-<<<<<<< HEAD
 use Inertia\Inertia;
 use Inertia\Response;
-=======
-use Illuminate\View\View;
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 
 class CreateShipmentController extends Controller
 {
@@ -29,7 +25,6 @@ class CreateShipmentController extends Controller
     }
 
     /** GET /customer/kirim — form kirim paket: isi tujuan, penerima, barang, sekaligus pilih bayar. */
-<<<<<<< HEAD
     public function create(Request $request): Response
     {
         $errors = $request->session()->get('errors');
@@ -41,15 +36,6 @@ class CreateShipmentController extends Controller
     }
 
 
-=======
-    public function create(): View
-    {
-        return view('customer.kirim', [
-            'branches' => Branch::orderBy('city')->get(['id', 'name', 'city']),
-        ]);
-    }
-
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
     /**
      * POST /customer/kirim
      * Bikin shipment + catat pembayaran dalam 1 submit. Penerima gak
@@ -74,11 +60,7 @@ class CreateShipmentController extends Controller
             'items.*.quantity' => ['required', 'integer', 'min:1'],
             'items.*.weight' => ['required', 'numeric', 'min:0.1'],
 
-<<<<<<< HEAD
             'payment_method' => ['required', 'in:transfer,e-wallet'],
-=======
-            'payment_method' => ['required', 'in:cash,transfer,e-wallet'],
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         ]);
 
         $originBranch = Branch::findOrFail($validated['origin_branch_id']);
@@ -114,22 +96,9 @@ class CreateShipmentController extends Controller
             ]);
         });
 
-<<<<<<< HEAD
         $this->paymentService->record($shipment, $validated['payment_method']);
 
         return Inertia::location(route('payment.show', $shipment));
     }
 }
 
-=======
-        $payment = $this->paymentService->record($shipment, $validated['payment_method']);
-
-        if ($payment->usesMidtrans()) {
-            return redirect()->route('payment.show', $shipment);
-        }
-
-        return redirect()->route('payment.show', $shipment)
-            ->with('success', "Shipment {$shipment->tracking_number} berhasil dibuat! Pembayaran cash menunggu konfirmasi kasir.");
-    }
-}
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5

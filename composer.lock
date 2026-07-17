@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "content-hash": "ce27f8ae14e9a7c60ed69e93a5e9942e",
-=======
-    "content-hash": "5fa47a00ef669e30edf88854b648f801",
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -3190,7 +3186,6 @@
             "time": "2026-06-23T18:43:15+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "midtrans/midtrans-php",
             "version": "2.6.2",
             "source": {
@@ -3252,8 +3247,6 @@
             "time": "2025-03-18T06:30:17+00:00"
         },
         {
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
             "name": "monolog/monolog",
             "version": "3.10.0",
             "source": {

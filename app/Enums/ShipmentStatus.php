@@ -42,7 +42,6 @@ enum ShipmentStatus: string
     {
         return in_array($this, [self::Delivered, self::Cancelled], true);
     }
-<<<<<<< HEAD
 
     /** Status berikutnya yang valid dalam alur linear normal. Null kalau sudah di akhir/final. */
     public function next(): ?self
@@ -56,6 +55,4 @@ enum ShipmentStatus: string
 
         return $order[$index + 1];
     }
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 }
