@@ -1,5 +1,4 @@
 <x-courier-layout title="Tugas Saya">
-<<<<<<< HEAD
     <!-- SUMMARY CARD -->
     <div class="mb-6 overflow-hidden rounded-2xl bg-brand-600 p-5 text-white shadow-lg shadow-brand-500/30">
         <div class="flex items-center gap-4">
@@ -54,26 +53,6 @@
                 </div>
                 <h3 class="text-base font-bold text-slate-700">Semua Beres!</h3>
                 <p class="mt-1 text-sm text-slate-500">Tidak ada tugas pengiriman saat ini.</p>
-=======
-    <div class="space-y-3">
-        @forelse ($shipments as $shipment)
-            <a href="{{ route('courier.shipments.show', $shipment) }}"
-               class="block rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
-                <div class="flex items-start justify-between">
-                    <p class="font-bold text-slate-800">{{ $shipment->tracking_number }}</p>
-                    <span class="rounded-full bg-brand-gradient-soft px-3 py-1 text-xs font-semibold text-brand-700">
-                        {{ $shipment->status->label() }}
-                    </span>
-                </div>
-                <div class="mt-3 text-sm text-slate-600">
-                    <p class="font-medium">{{ $shipment->receiver->name ?? '-' }}</p>
-                    <p class="text-slate-500">{{ $shipment->receiver->address ?? '-' }}, {{ $shipment->receiver->city ?? '-' }}</p>
-                </div>
-            </a>
-        @empty
-            <div class="rounded-2xl border border-dashed border-slate-200 p-10 text-center text-sm text-slate-400">
-                Tidak ada tugas pengiriman saat ini. 🎉
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
             </div>
         @endforelse
     </div>

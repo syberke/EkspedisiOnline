@@ -1,9 +1,6 @@
 <?php
 
-<<<<<<< HEAD
 use App\Http\Middleware\EnsureCustomerEmailIsVerified;
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 use App\Http\Middleware\EnsureUserHasRole;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\VerifyRecaptcha;
@@ -35,10 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'recaptcha' => VerifyRecaptcha::class,
             'role' => EnsureUserHasRole::class,
-<<<<<<< HEAD
             'verified.customer' => EnsureCustomerEmailIsVerified::class,
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         ]);
 
         // Wajib untuk semua halaman Vue/Inertia (Home, Track, About) —
@@ -48,22 +42,10 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleInertiaRequests::class,
         ]);
 
-<<<<<<< HEAD
         // Login sudah terpadu (satu halaman /login untuk semua guard), jadi
         // guest yang kena redirect dari guard manapun (`web` atau `customer`)
         // cukup diarahkan ke satu tempat yang sama.
         $middleware->redirectGuestsTo(fn () => route('login'));
-=======
-        // Default Laravel selalu redirect guest yang belum login ke
-        // route('login') (staff), padahal /customer/*, /shipments/*/payment
-        // itu punya guard `customer` sendiri. Tanpa ini, orang yang belum
-        // login dan buka /customer/kirim bakal nyasar ke halaman login staf.
-        $middleware->redirectGuestsTo(function ($request) {
-            return $request->is('customer/*') || $request->is('shipments/*/payment')
-                ? route('customer.login')
-                : route('login');
-        });
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

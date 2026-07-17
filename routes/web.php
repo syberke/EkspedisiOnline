@@ -2,10 +2,7 @@
 
 use App\Http\Controllers\Public\PageController;
 use App\Http\Controllers\Web\Admin\DashboardController;
-<<<<<<< HEAD
 use App\Http\Controllers\Web\Admin\PaymentController as AdminPaymentController;
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 use App\Http\Controllers\Web\Admin\RateController;
 use App\Http\Controllers\Web\Admin\ReportController;
 use App\Http\Controllers\Web\Admin\ShipmentController;
@@ -27,7 +24,6 @@ Route::get('/tentang', [PageController::class, 'about'])->name('about');
 
 /*
 |--------------------------------------------------------------------------
-<<<<<<< HEAD
 | Web Routes — Autentikasi Terpadu (unified login, guard `web` + `customer`)
 |--------------------------------------------------------------------------
 | Satu halaman `/login` untuk SEMUA role: Admin, Manager, Kasir, Kurir
@@ -57,33 +53,10 @@ Route::redirect('/customer/login', '/login', 301)->name('customer.login');
 |--------------------------------------------------------------------------
 | Staf (admin/manager/cashier/courier) tidak mendaftar sendiri — akun
 | dibuat oleh Admin, jadi tidak ada route register untuk guard `web`.
-=======
-| Web Routes — Autentikasi Staf (guard `web`, tabel `users`)
-|--------------------------------------------------------------------------
-| Staf (admin/manager/cashier/courier) tidak mendaftar sendiri — akun
-| dibuat oleh Admin. Jadi cuma ada halaman login, tidak ada register.
-*/
-Route::middleware('guest:web')->group(function () {
-    Route::get('/login', [LoginController::class, 'create'])->name('login');
-    Route::post('/login', [LoginController::class, 'store'])->middleware(['throttle:10,1', 'recaptcha']);
-});
-Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth:web')->name('logout');
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes — Autentikasi Customer (guard `customer`, tabel `customers`)
-|--------------------------------------------------------------------------
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 */
 Route::middleware('guest:customer')->prefix('customer')->name('customer.')->group(function () {
     Route::get('/register', [CustomerAuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [CustomerAuthController::class, 'register'])->middleware(['throttle:5,1', 'recaptcha']);
-<<<<<<< HEAD
-=======
-
-    Route::get('/login', [CustomerAuthController::class, 'showLogin'])->name('login');
-    Route::post('/login', [CustomerAuthController::class, 'login'])->middleware(['throttle:10,1', 'recaptcha']);
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 });
 Route::post('/customer/logout', [CustomerAuthController::class, 'logout'])
     ->middleware('auth:customer')->name('customer.logout');
@@ -106,11 +79,7 @@ Route::middleware('auth:customer')->prefix('customer/email')->group(function () 
 | Web Routes — Dashboard & Kirim Paket Customer (guard `customer`)
 |--------------------------------------------------------------------------
 */
-<<<<<<< HEAD
 Route::middleware('auth:customer')->prefix('customer')->name('customer.')->group(function () {
-=======
-Route::middleware(['auth:customer', 'verified:customer'])->prefix('customer')->name('customer.')->group(function () {
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
     Route::get('/dashboard', [\App\Http\Controllers\Web\Customer\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/kirim', [\App\Http\Controllers\Web\Customer\CreateShipmentController::class, 'create'])->name('kirim');
     Route::post('/kirim', [\App\Http\Controllers\Web\Customer\CreateShipmentController::class, 'store'])->name('kirim.store');
@@ -121,16 +90,10 @@ Route::middleware(['auth:customer', 'verified:customer'])->prefix('customer')->n
 | Web Routes — Pembayaran Customer (guard `customer`)
 |--------------------------------------------------------------------------
 */
-<<<<<<< HEAD
 Route::middleware(['auth:customer'])->group(function () {
     Route::get('/shipments/{shipment}/payment', [PaymentController::class, 'show'])->name('payment.show');
     Route::post('/shipments/{shipment}/payment', [PaymentController::class, 'store'])->name('payment.store');
     Route::post('/shipments/{shipment}/payment/sync', [PaymentController::class, 'sync'])->name('payment.sync');
-=======
-Route::middleware(['auth:customer', 'verified:customer'])->group(function () {
-    Route::get('/shipments/{shipment}/payment', [PaymentController::class, 'show'])->name('payment.show');
-    Route::post('/shipments/{shipment}/payment', [PaymentController::class, 'store'])->name('payment.store');
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 });
 Route::get('/pembayaran/{midtrans_order_id}/selesai', fn () => view('payment.finished'))->name('payment.finished');
 
@@ -151,7 +114,6 @@ Route::middleware(['auth:web', 'role:courier'])->prefix('courier')->name('courie
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth:web', 'role:admin,manager,cashier'])->prefix('admin')->name('admin.')->group(function () {
-<<<<<<< HEAD
     // Dashboard: semua role manajerial boleh lihat ringkasan (read-only stats).
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -178,26 +140,12 @@ Route::middleware(['auth:web', 'role:admin,manager,cashier'])->prefix('admin')->
     // Master data (tarif & kendaraan) — TUGAS Admin saja. Kasir & Manager
     // tidak boleh ubah tarif/armada, cuma pakai data yang sudah ada.
     Route::middleware('role:admin')->group(function () {
-=======
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-    Route::get('/shipments', [ShipmentController::class, 'index'])->name('shipments.index');
-    Route::get('/shipments/create', [ShipmentController::class, 'create'])->name('shipments.create');
-    Route::post('/shipments', [ShipmentController::class, 'store'])->name('shipments.store');
-    Route::get('/shipments/search-customers', [ShipmentController::class, 'searchCustomers'])->name('shipments.search-customers');
-    Route::get('/shipments/{shipment}', [ShipmentController::class, 'show'])->name('shipments.show');
-    Route::patch('/shipments/{shipment}/status', [ShipmentController::class, 'updateStatus'])->name('shipments.update-status');
-    Route::patch('/shipments/{shipment}/assign-courier', [ShipmentController::class, 'assignCourier'])->name('shipments.assign-courier');
-
-    Route::middleware('role:admin,manager')->group(function () {
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         Route::get('/rates', [RateController::class, 'index'])->name('rates.index');
         Route::post('/rates', [RateController::class, 'store'])->name('rates.store');
         Route::put('/rates/{rate}', [RateController::class, 'update'])->name('rates.update');
         Route::delete('/rates/{rate}', [RateController::class, 'destroy'])->name('rates.destroy');
 
         Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicles.index');
-<<<<<<< HEAD
 
         Route::post('/vehicles', [VehicleController::class, 'store'])->name('vehicles.store');
         Route::put('/vehicles/{vehicle}', [VehicleController::class, 'update'])->name('vehicles.update');
@@ -207,12 +155,6 @@ Route::middleware(['auth:web', 'role:admin,manager,cashier'])->prefix('admin')->
     // Laporan & grafik — TUGAS UTAMA Manager (view + export Excel/PDF),
     // Admin juga boleh akses untuk oversight.
     Route::middleware('role:admin,manager')->group(function () {
-=======
-        Route::post('/vehicles', [VehicleController::class, 'store'])->name('vehicles.store');
-        Route::put('/vehicles/{vehicle}', [VehicleController::class, 'update'])->name('vehicles.update');
-        Route::delete('/vehicles/{vehicle}', [VehicleController::class, 'destroy'])->name('vehicles.destroy');
-
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
         Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
     });

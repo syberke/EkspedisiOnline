@@ -11,7 +11,6 @@ defineProps({
     <Head title="Tentang Kami — drgEkspedisi" />
 
     <PublicLayout>
-<<<<<<< HEAD
         <!-- HERO SECTION -->
         <section class="relative overflow-hidden bg-brand-gradient-soft pt-20 pb-24 sm:pt-28 sm:pb-32">
             <div class="relative z-10 mx-auto max-w-4xl px-5 text-center">
@@ -93,28 +92,6 @@ defineProps({
                             </div>
                         </div>
                     </div>
-=======
-        <section class="bg-brand-gradient-soft py-16">
-            <div class="mx-auto max-w-4xl px-5 text-center">
-                <h1 class="text-3xl font-extrabold text-slate-800 sm:text-4xl">Tentang drgEkspedisi</h1>
-                <p class="mx-auto mt-4 max-w-2xl text-slate-600">
-                    Platform pengiriman barang terpadu, dari gerbang cabang hingga pintu penerima.
-                </p>
-            </div>
-        </section>
-
-        <section class="mx-auto max-w-6xl px-5 py-16">
-            <h2 class="text-2xl font-extrabold text-slate-800">Jaringan Cabang Kami</h2>
-            <p class="mt-2 text-slate-500">{{ branches.length }} cabang siap melayani pengiriman Anda.</p>
-
-            <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                <div v-for="branch in branches" :key="branch.id"
-                     class="rounded-2xl border border-slate-100 p-5 transition hover:border-brand-200">
-                    <h3 class="font-bold text-slate-800">{{ branch.name }}</h3>
-                    <span class="mt-1 inline-block rounded-full bg-brand-gradient-soft px-3 py-1 text-xs font-semibold text-brand-700">{{ branch.city }}</span>
-                    <p class="mt-2 text-sm text-slate-500">{{ branch.address }}</p>
-                    <p class="mt-1 text-sm font-medium text-transit-600">{{ branch.phone }}</p>
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
                 </div>
             </div>
         </section>

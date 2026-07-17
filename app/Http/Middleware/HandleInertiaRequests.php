@@ -31,13 +31,10 @@ class HandleInertiaRequests extends Middleware
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error'),
             ],
-<<<<<<< HEAD
             // Beberapa halaman (mis. Customer/Kirim.vue) pakai native <form>
             // POST biasa, bukan Inertia router.post() — butuh token CSRF
             // di-share manual di sini, jangan cuma andalin meta tag.
             'csrf_token' => fn () => csrf_token(),
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         ];
     }
 }

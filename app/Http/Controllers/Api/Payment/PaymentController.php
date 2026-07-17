@@ -22,7 +22,6 @@ class PaymentController extends Controller
         // (Customer), tidak lewat guard session `customer`.
         abort_unless($shipment->sender_id === $request->user()->id, 403);
 
-<<<<<<< HEAD
         if ($shipment->payments()->where('payment_status', 'paid')->exists()) {
             return response()->json([
                 'message' => 'Shipment ini sudah lunas, tidak bisa dibayar lagi.',
@@ -31,10 +30,6 @@ class PaymentController extends Controller
 
         $validated = $request->validate([
             'payment_method' => ['required', 'in:transfer,e-wallet'],
-=======
-        $validated = $request->validate([
-            'payment_method' => ['required', 'in:cash,transfer,e-wallet'],
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         ]);
 
         $payment = $this->paymentService->record($shipment, $validated['payment_method']);

@@ -4,17 +4,12 @@ namespace App\Http\Controllers\Web\Customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
 use Inertia\Inertia;
 use Inertia\Response;
-=======
-use Illuminate\View\View;
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 
 class DashboardController extends Controller
 {
     /** GET /customer/dashboard — daftar shipment yang dikirim customer ini + status bayar. */
-<<<<<<< HEAD
     public function index(Request $request): Response
     {
         $customer = $request->user('customer');
@@ -47,24 +42,3 @@ class DashboardController extends Controller
     }
 }
 
-=======
-    public function index(Request $request): View
-    {
-        $customer = $request->user('customer');
-
-        $shipments = $customer
-            ->sentShipments()
-            ->with(['receiver:id,name,city', 'originBranch:id,name', 'destinationBranch:id,name', 'payments'])
-            ->latest()
-            ->paginate(10);
-
-        $summary = [
-            'total' => $customer->sentShipments()->count(),
-            'in_progress' => $customer->sentShipments()->whereNotIn('status', ['delivered', 'cancelled'])->count(),
-            'delivered' => $customer->sentShipments()->where('status', 'delivered')->count(),
-        ];
-
-        return view('customer.dashboard', compact('shipments', 'summary'));
-    }
-}
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5

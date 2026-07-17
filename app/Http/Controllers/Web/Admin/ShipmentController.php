@@ -9,10 +9,6 @@ use App\Models\Branch;
 use App\Models\Customer;
 use App\Models\Rate;
 use App\Models\Shipment;
-<<<<<<< HEAD
-=======
-use App\Models\User;
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 use App\Services\ShipmentService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -64,13 +60,7 @@ class ShipmentController extends Controller
 
         $shipment->load(['sender', 'receiver', 'originBranch', 'destinationBranch', 'rate', 'courier', 'items', 'trackings']);
 
-<<<<<<< HEAD
         return view('admin.shipments.show', compact('shipment'));
-=======
-        $couriers = User::role('courier')->get(['id', 'name']);
-
-        return view('admin.shipments.show', compact('shipment', 'couriers'));
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
     }
 
     public function updateStatus(UpdateShipmentStatusRequest $request, Shipment $shipment): RedirectResponse

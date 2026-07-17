@@ -2,15 +2,10 @@
 
 namespace App\Services;
 
-<<<<<<< HEAD
 use App\Enums\ShipmentStatus;
 use App\Models\Payment;
 use App\Models\Shipment;
 use App\Models\ShipmentTracking;
-=======
-use App\Models\Payment;
-use App\Models\Shipment;
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 use App\Services\Payment\MidtransGateway;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -51,26 +46,15 @@ class PaymentService
                     'midtrans_raw_response' => $result,
                 ]);
             } catch (\Throwable $e) {
-<<<<<<< HEAD
-=======
-                // Kalau Midtrans gagal (key belum diisi/salah, atau server
-                // Midtrans lagi down), jangan sampai seluruh request crash
-                // (500). Payment tetap tersimpan dengan status `failed` +
-                // alasan di log, biar kasir bisa follow-up manual, dan
-                // customer dapat pesan yang jelas alih-alih halaman error.
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
                 report($e);
 
                 $payment->update([
                     'payment_status' => 'failed',
                     'midtrans_raw_response' => ['error' => $e->getMessage()],
                 ]);
-<<<<<<< HEAD
 
                 // Auto-update shipment status when payment fails at creation
                 $this->updateShipmentStatusOnPaymentFailure($shipment);
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
             }
         }
 
@@ -80,21 +64,13 @@ class PaymentService
     /**
      * Kasir konfirmasi pembayaran cash sudah diterima ("rekap uang").
      * Begitu lunas, otomatis lanjut ke tahap berikutnya: paket ditugaskan
-<<<<<<< HEAD
      * ke kurir aktif berikutnya secara bergantian.
-=======
-     * ke kurir aktif berikutnya secara bergantian (lihat
-     * ShipmentService::processAtCounter()) — kasir gak perlu assign manual.
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
      */
     public function markAsPaid(Payment $payment): Payment
     {
         $payment->update(['payment_status' => 'paid', 'payment_date' => now()]);
 
-<<<<<<< HEAD
         $this->voidOtherPendingPayments($payment);
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         $this->shipmentService->processAtCounter($payment->shipment);
 
         return $payment;
@@ -104,7 +80,6 @@ class PaymentService
     {
         $payment->update(['payment_status' => 'failed']);
 
-<<<<<<< HEAD
         $this->updateShipmentStatusOnPaymentFailure($payment->shipment);
 
         return $payment;
@@ -116,8 +91,6 @@ class PaymentService
 
         $this->updateShipmentStatusOnPaymentFailure($payment->shipment);
 
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         return $payment;
     }
 
@@ -126,7 +99,6 @@ class PaymentService
     {
         $payment = Payment::where('midtrans_order_id', $payload['order_id'])->firstOrFail();
 
-<<<<<<< HEAD
         return $this->applyMidtransStatus($payment, $payload);
     }
 
@@ -159,8 +131,6 @@ class PaymentService
     /** Logika bersama: terapkan payload status Midtrans (dari webhook maupun status-check aktif) ke Payment + shipment terkait. */
     private function applyMidtransStatus(Payment $payment, array $payload): Payment
     {
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         $status = $this->midtrans->mapStatus($payload['transaction_status']);
 
         $payment->update([
@@ -172,7 +142,6 @@ class PaymentService
         ]);
 
         if ($status === 'paid') {
-<<<<<<< HEAD
             $this->voidOtherPendingPayments($payment);
             $this->shipmentService->processAtCounter($payment->shipment);
         } elseif (in_array($status, ['failed', 'expired'], true)) {
@@ -213,11 +182,3 @@ class PaymentService
             ->update(['payment_status' => 'failed']);
     }
 }
-=======
-            $this->shipmentService->processAtCounter($payment->shipment);
-        }
-
-        return $payment;
-    }
-}
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5

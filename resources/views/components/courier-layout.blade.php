@@ -9,7 +9,6 @@
     <title>{{ $title ?? 'Kurir' }} — drgEkspedisi</title>
     @vite(['resources/css/app.css', 'resources/js/admin.js'])
 </head>
-<<<<<<< HEAD
 <body class="min-h-screen bg-slate-50 font-sans antialiased pb-20 sm:pb-0">
     <header class="sticky top-0 z-20 border-b border-brand-600 bg-brand-gradient px-4 py-4 text-white shadow-md">
         <div class="mx-auto flex max-w-md items-center justify-between">
@@ -41,32 +40,11 @@
         @endif
         @if (session('error'))
             <div class="mb-5 rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm font-bold text-rose-700 shadow-sm">{{ session('error') }}</div>
-=======
-<body class="min-h-screen bg-slate-50 font-sans antialiased">
-    <header class="sticky top-0 z-20 flex items-center justify-between border-b border-slate-100 bg-brand-gradient px-5 py-4 text-white">
-        <div class="flex items-center gap-2">
-            <span class="grid h-8 w-8 place-items-center rounded-lg bg-white/20 font-bold">D</span>
-            <span class="font-bold">{{ $title ?? 'Kurir' }}</span>
-        </div>
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="text-sm font-medium text-white/80">Keluar</button>
-        </form>
-    </header>
-
-    <main class="mx-auto max-w-md px-4 py-5 pb-20">
-        @if (session('success'))
-            <div class="mb-4 rounded-xl bg-brand-50 px-4 py-3 text-sm font-medium text-brand-700">{{ session('success') }}</div>
-        @endif
-        @if (session('error'))
-            <div class="mb-4 rounded-xl bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700">{{ session('error') }}</div>
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
         @endif
 
         {{ $slot }}
     </main>
 
-<<<<<<< HEAD
     <!-- Bottom Navigation for Mobile -->
     <nav class="fixed bottom-0 left-0 right-0 z-30 border-t border-slate-200 bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] sm:hidden pb-safe">
         <div class="mx-auto flex max-w-md justify-around px-2 py-2">
@@ -85,8 +63,6 @@
         </div>
     </nav>
 
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/service-worker.js').catch(console.error);

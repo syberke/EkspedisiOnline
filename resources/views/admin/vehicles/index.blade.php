@@ -9,10 +9,7 @@
 
         <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             @forelse ($vehicles as $vehicle)
-<<<<<<< HEAD
                 @php($vehicleEditData = $vehicle->only(['id', 'plate_number', 'type', 'courier_id']))
-=======
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
                 <div class="rounded-2xl border border-slate-100 bg-white p-5">
                     <div class="flex items-start justify-between">
                         <div>
@@ -24,11 +21,7 @@
                     <p class="mt-3 text-xs text-slate-500">Kurir: {{ $vehicle->courier->name ?? '-' }}</p>
 
                     <div class="mt-4 flex gap-2 border-t border-slate-100 pt-3">
-<<<<<<< HEAD
                         <button @click="modalOpen = true; editing = @json($vehicleEditData)"
-=======
-                        <button @click='modalOpen = true; editing = {{ $vehicle->only(["id","plate_number","type","courier_id"]) }}'
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
                                 class="text-sm font-semibold text-brand-600">Edit</button>
                         <form method="POST" action="{{ route('admin.vehicles.destroy', $vehicle) }}" onsubmit="return confirm('Hapus kendaraan ini?')">
                             @csrf @method('DELETE')
@@ -54,21 +47,13 @@
 
                     <input type="text" name="plate_number" x-bind:value="editing?.plate_number" placeholder="Plat Nomor" required class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none">
 
-<<<<<<< HEAD
                     <select name="type" x-bind:value="editing?.type" required class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none">
-=======
-                    <select name="type" required class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none">
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
                         <option value="motor">Motor</option>
                         <option value="mobil">Mobil</option>
                         <option value="truck">Truck</option>
                     </select>
 
-<<<<<<< HEAD
                     <select name="courier_id" x-bind:value="editing?.courier_id" required class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none">
-=======
-                    <select name="courier_id" required class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none">
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
                         <option value="">Pilih kurir...</option>
                         @foreach ($couriers as $courier)
                             <option value="{{ $courier->id }}">{{ $courier->name }}</option>
@@ -83,8 +68,4 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
 </x-admin-layout>
-=======
-</x-admin-layout>
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5

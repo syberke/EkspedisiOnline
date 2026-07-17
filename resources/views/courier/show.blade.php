@@ -16,7 +16,6 @@
         @csrf
         @method('PATCH')
 
-<<<<<<< HEAD
         @if ($nextStatus)
             <div>
                 <label class="text-xs font-semibold text-slate-500">Update Status</label>
@@ -42,18 +41,6 @@
                 ✅ Shipment ini sudah pada status akhir ({{ $shipment->status->label() }}).
             </div>
         @endif
-=======
-        <div>
-            <label class="text-xs font-semibold text-slate-500">Update Status</label>
-            <select name="status" required class="mt-1 w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm">
-                <option value="picked_up">Sudah Diambil</option>
-                <option value="in_transit">Dalam Perjalanan</option>
-                <option value="arrived_at_branch">Tiba di Cabang</option>
-                <option value="out_for_delivery">Sedang Diantar</option>
-                <option value="delivered">Terkirim (Selesai)</option>
-            </select>
-        </div>
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
 
         <div>
             <label class="text-xs font-semibold text-slate-500">Catatan</label>
@@ -66,11 +53,7 @@
             <input type="file" name="photo" accept="image/*" capture="environment" class="mt-1 w-full text-sm">
         </div>
 
-<<<<<<< HEAD
         <button type="submit" @disabled(! $nextStatus) class="w-full rounded-xl bg-brand-gradient px-6 py-3 text-sm font-semibold text-white disabled:opacity-50">
-=======
-        <button type="submit" class="w-full rounded-xl bg-brand-gradient px-6 py-3 text-sm font-semibold text-white">
->>>>>>> 7f212d9de6c10c5f1227a5e90633dd57e257b7c5
             Simpan Update
         </button>
     </form>
