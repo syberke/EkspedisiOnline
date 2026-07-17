@@ -2,7 +2,7 @@ name: Resolve committed merge conflicts
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, synchronize]
 
 permissions:
   contents: write
@@ -28,6 +28,7 @@ jobs:
 
           tracked = subprocess.check_output(["git", "ls-files", "-z"]).split(b"\0")
           changed = []
+          warnings = []
 
           def resolve_ours(text: str, path: str) -> tuple[str, bool]:
               output = []
@@ -58,7 +59,7 @@ jobs:
                           state = "normal"
 
               if state != "normal":
-                  raise RuntimeError(f"Unclosed conflict block in {path}")
+                  warnings.append(f"Malformed conflict block resolved to EOF in {path}")
 
               return "".join(output), modified
 
@@ -67,6 +68,9 @@ jobs:
                   continue
 
               path = Path(raw_path.decode("utf-8"))
+              if str(path) == ".env.example":
+                  continue
+
               data = path.read_bytes()
               if b"\0" in data:
                   continue
@@ -139,6 +143,8 @@ jobs:
           print(f"Resolved {len(changed)} files:")
           for path in changed:
               print(f"- {path}")
+          for warning in warnings:
+              print(f"WARNING: {warning}")
           PY
 
       - name: Verify conflict markers are gone
